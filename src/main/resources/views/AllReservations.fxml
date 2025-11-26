@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.airline.controllers.AllReservationsController"
+            style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);">
+
+    <top>
+        <VBox spacing="15">
+            <Label text="All Reservations"
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <VBox spacing="5">
+                    <Label text="Search:" style="-fx-font-weight: bold; -fx-text-fill: whit;"/>
+                    <TextField fx:id="searchField" style="-fx-text-fill: #764ba2;" promptText="Enter search term"
+                               onKeyReleased="#searchReservations" prefWidth="200"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Search By:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <ComboBox fx:id="searchType" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" onAction="#searchReservations" prefWidth="120"/>
+                </VBox>
+
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <VBox spacing="5">
+                    <Label text="Actions:" style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+                    <HBox spacing="10">
+                        <Button text="Refresh" onAction="#refreshReservations"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                        <Button text="View Details" onAction="#viewReservationDetails"
+                                style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                        <Button text="Cancel" onAction="#cancelReservation"
+                                style="-fx-background-color: #e74c3c; -fx-text-fill: white;"/>
+                        <Button text="Print Ticket" onAction="#printTicket"
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white;"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <ProgressIndicator fx:id="loadingIndicator" visible="false"/>
+                <Label fx:id="totalReservationsLabel" text="Loading reservations..."
+                       style="-fx-font-weight: bold; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <TableView fx:id="reservationsTable" prefHeight="600">
+            <columns>
+                <TableColumn text="PNR" fx:id="colPnr" prefWidth="100"/>
+                <TableColumn text="Customer" fx:id="colCustomer" prefWidth="150"/>
+                <TableColumn text="Flight" fx:id="colFlight" prefWidth="150"/>
+                <TableColumn text="Route" fx:id="colRoute" prefWidth="150"/>
+                <TableColumn text="Class" fx:id="colClass" prefWidth="80"/>
+                <TableColumn text="Seat" fx:id="colSeat" prefWidth="60"/>
+                <TableColumn text="Travel Date" fx:id="colTravelDate" prefWidth="100"/>
+                <TableColumn text="Fare" fx:id="colFare" prefWidth="100"/>
+                <TableColumn text="Status" fx:id="colStatus" prefWidth="100"/>
+            </columns>
+        </TableView>
+    </center>
+
+    <bottom>
+        <HBox spacing="15" style="-fx-padding: 20 0 0 0;" alignment="CENTER_RIGHT">
+            <Button text="Close" onAction="#closeWindow"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

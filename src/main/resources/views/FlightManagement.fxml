@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.airline.controllers.FlightManagementController"
+            style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom, #667eea 0%, #764ba2 100%);">
+
+    <top>
+        <VBox spacing="15">
+            <Label text="Flight Management"
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <TextField fx:id="searchField" promptText="Search flights..."
+                           onKeyReleased="#handleSearch" prefWidth="300"/>
+                <Button text="Search" onAction="#handleSearch"
+                        style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+                <Button text="Refresh" onAction="#handleRefresh"
+                        style="-fx-background-color: #2ecc71; -fx-text-fill: white;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <ProgressIndicator fx:id="loadingIndicator" visible="false"/>
+                <Label fx:id="statusLabel" text="Status: Ready"
+                       style="-fx-text-fill: white; -fx-font-style: italic;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.6" orientation="VERTICAL">
+
+            <VBox spacing="15" style="-fx-padding: 10;">
+                <Label text="Flight Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+
+                <ScrollPane fitToWidth="true">
+                    <GridPane hgap="10" vgap="10" style="-fx-padding: 10;">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="150"/>
+                            <ColumnConstraints prefWidth="250"/>
+                            <ColumnConstraints prefWidth="150"/>
+                            <ColumnConstraints prefWidth="250"/>
+                        </columnConstraints>
+
+                        <Label text="Flight Code:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="flightCodeField" style="-fx-text-fill: #764ba2;" promptText="e.g., AI101" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Flight Name:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="flightNameField" style="-fx-text-fill: #764ba2;" promptText="e.g., Air India" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                        <Label text="Source:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <ComboBox fx:id="sourcePlaceCombo" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Destination:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <ComboBox fx:id="destinationPlaceCombo" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                        <Label text="Route:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextField fx:id="routeField" style="-fx-text-fill: #764ba2;" editable="false" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Departure Time:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                        <TextField fx:id="departureTimeField" style="-fx-text-fill: #764ba2;" promptText="HH:MM" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                        <Label text="Arrival Time:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                        <TextField fx:id="arrivalTimeField" style="-fx-text-fill: #764ba2;" promptText="HH:MM" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                        <Label text="Economy Seats:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="3" GridPane.columnIndex="2"/>
+                        <TextField fx:id="economySeatsField" style="-fx-text-fill: #764ba2;" promptText="e.g., 150" GridPane.rowIndex="3" GridPane.columnIndex="3"/>
+
+                        <Label text="Business Seats:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                        <TextField fx:id="businessSeatsField" style="-fx-text-fill: #764ba2;" promptText="e.g., 30" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+                    </GridPane>
+                </ScrollPane>
+
+                <VBox spacing="10" style="-fx-padding: 10;">
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="⏮ First" onAction="#handleFirst"
+                                style="-fx-background-color: #764ba2; -fx-text-fill: white;"/>
+                        <Button text="⏪ Previous" onAction="#handlePrevious"
+                                style="-fx-background-color: #764ba2; -fx-text-fill: white;"/>
+                        <Label fx:id="recordInfoLabel" text="New Flight"
+                               style="-fx-font-weight: bold; -fx-padding: 5 20; -fx-text-fill: #764ba2;"/>
+                        <Button text="⏩ Next" onAction="#handleNext"
+                                style="-fx-background-color: #764ba2; -fx-text-fill: white;"/>
+                        <Button text="⏭ Last" onAction="#handleLast"
+                                style="-fx-background-color: #764ba2; -fx-text-fill: white;"/>
+                    </HBox>
+
+                    <HBox spacing="15" alignment="CENTER">
+                        <Button text="New" onAction="#handleNew"
+                                style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Button text="Add" onAction="#handleAdd"
+                                style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Button text="Save" onAction="#handleSave"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Button text="Update" onAction="#handleUpdate"
+                                style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        <Button text="Delete" onAction="#handleDelete"
+                                style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <VBox spacing="10" style="-fx-padding: 10;">
+                <Label text="All Flights" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TableView fx:id="flightsTable" prefHeight="300" style="-fx-text-fill: #764ba2;">
+                    <columns >
+                        <TableColumn text="Flight Code" fx:id="colFlightCode" prefWidth="90"/>
+                        <TableColumn text="Flight Name" fx:id="colFlightName" prefWidth="120"/>
+                        <TableColumn text="Route" fx:id="colRoute" prefWidth="150"/>
+                        <TableColumn text="Departure" fx:id="colDeparture" prefWidth="80"/>
+                        <TableColumn text="Arrival" fx:id="colArrival" prefWidth="80"/>
+                        <TableColumn text="Eco Seats" fx:id="colEcoSeats" prefWidth="70"/>
+                        <TableColumn text="Bus Seats" fx:id="colBusSeats" prefWidth="70"/>
+                        <TableColumn text="Eco Booked" fx:id="colEcoBooked" prefWidth="80"/>
+                        <TableColumn text="Bus Booked" fx:id="colBusBooked" prefWidth="80"/>
+                        <TableColumn text="Status" fx:id="colStatus" prefWidth="80"/>
+                        <TableColumn text="Actions" fx:id="colActions" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+
+        </SplitPane>
+    </center>
+    <bottom>
+        <HBox spacing="15" style="-fx-padding: 20 0 0 0;" alignment="CENTER_RIGHT">
+            <Button text="Close" onAction="#handleClose"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 20;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

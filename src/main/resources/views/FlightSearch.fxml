@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.airline.controllers.FlightSearchController"
+            style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <top>
+        <VBox spacing="20">
+            <Label text="Flight Search &amp; Booking"
+                   style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white;"/>
+
+            <HBox spacing="20" alignment="CENTER_LEFT" style="-fx-padding: 20; -fx-background-color: #ecf0f1; -fx-background-radius: 10;">
+                <VBox spacing="5">
+                    <Label text="From:" style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+                    <ComboBox fx:id="sourceCombo" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" prefWidth="150"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="To:" style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+                    <ComboBox fx:id="destinationCombo" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" prefWidth="150"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Travel Date:" style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+                    <DatePicker fx:id="travelDatePicker" prefWidth="150" style="-fx-text-fill: #764ba2;"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Class:" style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+                    <ComboBox fx:id="classCombo" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: #764ba2; -fx-text-fill: #764ba2; -fx-font-weight: bold; -fx-height: 10px;" prefWidth="120"/>
+                </VBox>
+
+                <VBox spacing="5">
+                    <Label text="Actions:" style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+                    <HBox spacing="10">
+                        <Button text="Search Flights" onAction="#handleSearch"
+                                style="-fx-background-color: #764ba2; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 8 15;"
+                                fx:id="searchButton"/>
+                        <Button text="Clear" onAction="#handleClear"
+                                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="15" alignment="CENTER_LEFT">
+                <ProgressIndicator fx:id="searchProgress" visible="false"/>
+                <Label fx:id="resultsLabel" text="Enter search criteria and click Search"
+                       style="-fx-font-weight: bold; -fx-text-fill: #764ba2;"/>
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox spacing="15">
+            <ScrollPane fitToWidth="true" prefHeight="500">
+                <VBox fx:id="flightResultsContainer" spacing="15" style="-fx-padding: 20;"/>
+            </ScrollPane>
+
+            <Pagination fx:id="pagination"
+                        style="-fx-padding: 10 0; -fx-alignment: center;"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox spacing="15" style="-fx-padding: 20 0 0 0;" alignment="CENTER_RIGHT">
+            <Button text="Close" onAction="#handleClose"
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 20;"/>
+        </HBox>
+    </bottom>
+
+</BorderPane>

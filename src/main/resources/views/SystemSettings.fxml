@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.airline.controllers.SystemSettingsController"
+            style="-fx-padding: 20; -fx-background-color: linear-gradient(to bottom right, #667eea 0%, #764ba2 100%);">
+
+    <top>
+        <Label text="System Settings"
+               style="-fx-font-size: 32px; -fx-font-weight: bold; -fx-text-fill: white; -fx-padding: 0 0 20 0;"/>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true">
+            <VBox spacing="20" style="-fx-padding: 10;">
+
+                <TitledPane text="General Settings" style="-fx-text-fill: #764ba2;">
+                    <GridPane hgap="15" vgap="15" style="-fx-padding: 20; -fx-text-fill: #764ba2;">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="150"/>
+                            <ColumnConstraints prefWidth="300"/>
+                            <ColumnConstraints prefWidth="150"/>
+                            <ColumnConstraints prefWidth="300"/>
+                        </columnConstraints>
+
+                        <Label text="Airline Name:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <TextField fx:id="airlineNameField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Contact Email:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <TextField fx:id="contactEmailField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                        <Label text="Contact Phone:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <TextField fx:id="contactPhoneField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Website:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <TextField fx:id="websiteField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                        <Label text="Address:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <TextArea fx:id="addressArea" style="-fx-text-fill: #764ba2;" prefRowCount="3" GridPane.columnSpan="3"
+                                  GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                    </GridPane>
+
+                    <HBox spacing="10" style="-fx-padding: 10 20 20 20;">
+                        <Button text="Save General Settings" onAction="#handleSaveGeneral"
+                                style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                    </HBox>
+                </TitledPane>
+
+                <TitledPane text="Business Rules" style="-fx-text-fill: #764ba2;">
+                    <GridPane hgap="15" vgap="15" style="-fx-padding: 20; -fx-text-fill: #764ba2;">
+                        <columnConstraints>
+                            <ColumnConstraints prefWidth="200"/>
+                            <ColumnConstraints prefWidth="200"/>
+                            <ColumnConstraints prefWidth="200"/>
+                            <ColumnConstraints prefWidth="200"/>
+                        </columnConstraints>
+
+                        <Label text="Max Seats per Flight:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                        <Spinner fx:id="maxSeatsSpinner" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                        <Label text="Cancellation Hours:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                        <Spinner fx:id="cancellationHoursSpinner" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+
+                        <Label text="Tax Rate (%):" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                        <Spinner fx:id="taxRateSpinner" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                        <Label text="Allow Online Check-in:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                        <CheckBox fx:id="allowOnlineCheckin" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                        <Label text="Email Notifications:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                        <CheckBox fx:id="sendEmailNotifications" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                        <Label text="Maintenance Mode:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                        <CheckBox fx:id="maintenanceMode" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+                    </GridPane>
+
+                    <HBox spacing="10" style="-fx-padding: 10 20 20 20;">
+                        <Button text="💼 Save Business Settings" onAction="#handleSaveBusiness"
+                                style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                    </HBox>
+                </TitledPane>
+
+                <TitledPane text="Security Settings" style="-fx-text-fill: #764ba2;">
+                    <VBox spacing="15" style="-fx-padding: 20;">
+                        <Label text="Change Admin Password:" style="-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #764ba2;"/>
+
+                        <GridPane hgap="15" vgap="10">
+                            <columnConstraints>
+                                <ColumnConstraints prefWidth="150"/>
+                                <ColumnConstraints prefWidth="300"/>
+                            </columnConstraints>
+
+                            <Label text="Current Password:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0"/>
+                            <PasswordField fx:id="currentPasswordField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                            <Label text="New Password:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1"/>
+                            <PasswordField fx:id="newPasswordField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                            <Label text="Confirm Password:" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2"/>
+                            <PasswordField fx:id="confirmPasswordField" style="-fx-text-fill: #764ba2;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                        </GridPane>
+
+                        <HBox spacing="10">
+                            <Button text="🔒 Change Password" onAction="#handleSaveSecurity"
+                                    style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <TitledPane text="System Administration" style="-fx-text-fill: #764ba2;">
+                    <VBox spacing="15" style="-fx-padding: 20;">
+                        <HBox spacing="15">
+                            <Button text="📂 Create Backup" onAction="#handleBackup"
+                                    style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+                            <Button text="🔄 Reset to Defaults" onAction="#handleResetSettings"
+                                    style="-fx-background-color: #95a5a6; -fx-text-fill: white;"/>
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <VBox spacing="10" style="-fx-padding: 20 0 0 0;">
+            <Label fx:id="statusLabel" text="Status: Ready" style="-fx-text-fill: white;"/>
+            <HBox spacing="15" alignment="CENTER_RIGHT">
+                <Button text="Close" onAction="#handleClose"
+                        style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>
